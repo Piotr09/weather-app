@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Sora', sans-serif;
+    background: #e1eec3; 
+    background: -webkit-linear-gradient(to left, #f05053, #eeeac3b3); 
+    background: linear-gradient(to left, #f05053, #eeeac3b3); 
+    font-size: 20px;
+}
+
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px;
+}
+
+input {
+    font-size: 16px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: rgb(46, 46, 46);
+    padding: 8px 10px;
+    background-color: white;
+    border-radius: 4px;
+    width: 230px;
+}
+
+input::placeholder {
+    color: rgb(199, 199, 199);
+    font-family: 'Montserrat', sans-serif;
+}
+
+button {
+    padding: 10px;
+    margin-left: 20px;
+    color: #fff;
+    font-weight: bold;
+    background: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color .3s, color .3s;
+    background: #ef5757;
+    border: unset;
+}
+
+button:hover {
+    color: #333;
+    background-color: #ddd;
+}
+
+.wrapper {
+    width: 800px;
+    padding: 20px 40px;
+background: rgba(255, 255, 255, 0.56);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(11.4px);
+-webkit-backdrop-filter: blur(11.4px);
+border: 1px solid rgba(255, 255, 255, 0.64);
+    border-radius: 25px;
+}
+
+.top {
+    height: 260px;
+}
+
+.bottom {
+    height: 140px;
+}
+
+.main-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 200px;
+}
+
+.city-name {
+    font-size: 40px;
+}
+
+.headings,
+.weather-info {
+    display: flex;
+    align-items: center;
+}
+
+.headings p,
+.weather-info p {
+    width: 33.3%;
+    text-align: center;
+}
+
+.headings {
+    height: 35%;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.weather-info {
+    height: 65%;
+    font-size: 26px;
+}
+
+.photo {
+    /* width: 140px;
+    height: 140px;
+	object-fit: contain; */
+    font-size: 120px;
+}
+
+.warning {
+    margin-top: 10px;
+    font-size: 14px;
+    color: tomato;
+}

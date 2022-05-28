@@ -193,6 +193,10 @@ button {
     padding: 0;
     margin: 0;
 
+    :hover {
+      cursor: pointer;
+    }
+
     &--date {
       @include backgroundText();
       font-size: 14px;

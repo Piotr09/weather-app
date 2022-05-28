@@ -13,7 +13,7 @@ const nextDaysIcon = document.querySelectorAll('.full-forecast__next-days li img
 const nextDaysTemparature = document.querySelectorAll('.full-forecast__next-days--temperature')
 
 const GEOCODING_URL = 'https://api.openweathermap.org/geo/1.0/direct?q='
-const WEATHER_URL = 'https://api.weatherapi.com/v1/forecast.json?key='
+const WEATHER_URL = 'http://api.weatherapi.com/v1/forecast.json?key='
 const API_TOKEN = 'e9f9eb83f1c04a2a85f174418222605'
 OPEN_WEATHER_API_TOKEN = '&appid=9b8e273d9d1f44fac5fc9ea06dc377db&units=metric'
 
@@ -47,25 +47,35 @@ async function getWeather() {
         const FORECAST_URL = `${WEATHER_URL}${API_TOKEN}&q=${lat},${lon}&days=7&lang=pl`
         
         axios.get(FORECAST_URL).then(res => {
-            const temp = Math.round(res.data.current.temp_c)
             const hum = res.data.current.humidity
-            const status = res.data.current.condition
             const wind = res.data.current.wind_kph
-            const nextDaysForecast = res.data.forecast.forecastday
+            const status = res.data.current.condition
+            const temp = `${Math.round(res.data.current.temp_c)}℃`
+            const hunAndWind = `💦 ${hum}% / 💨 ${Math.floor(wind)}<span class='smaller-unit'>km/h</span>`
+    
+            const currentWeatherMain = () => {
+                photo.setAttribute('src', `https:${status.icon}`) 
+                photo.setAttribute('alt', `https:${status.text}`) 
+                mainTemperature.textContent = temp
+                humidity.innerHTML = hunAndWind
+                mainWeather.textContent =  status.text
+            }
 
-            mainTemperature.textContent = `${temp}℃`
-            humidity.innerHTML = `💦 ${hum}% / 💨 ${Math.floor(wind)}<span class='smaller-unit'>km/h</span>`
-            mainWeather.textContent =  status.text
-            photo.setAttribute('src', `https:${status.icon}`) 
-            photo.setAttribute('alt', `https:${status.text}`) 
+            currentWeatherMain()
   
             const getDayName = (date) => {
                 const newDate = new Date(date);
                 return newDate.toLocaleDateString('pl-PL', { weekday: 'long' })
             }
+            
+            const nextDaysForecast = res.data.forecast.forecastday
 
-            const nextDaysWeather = () => {
-                for(i=0; i<nextDaysForecast.length; i++) {
+            const nextDaysWeather = e => {
+                nextDaysDate[0].textContent =  getDayName(nextDaysForecast[0].date) 
+                nextDaysIcon[0].setAttribute('src', `https:${status.icon}`)
+                nextDaysTemparature[0].innerHTML = `${temp} / ${Math.floor(wind)}<span class='smaller-unit'>km/h</span>`
+                
+                for(let i = 1; i < nextDaysForecast.length; i++) {
                 nextDaysDate[i].textContent =  getDayName(nextDaysForecast[i].date) 
                 nextDaysIcon[i].setAttribute('src', `https:${nextDaysForecast[i].day.condition.icon}`)
                 nextDaysIcon[i].setAttribute('alt', nextDaysForecast[i].day.condition.text)
@@ -74,6 +84,20 @@ async function getWeather() {
             }
 
             nextDaysWeather()
+
+            nextDays.onclick = function(e) {
+                var li = e.target.closest('li');
+                var nodes = Array.from( li.closest('ul').children );
+                var index = nodes.indexOf( li );
+
+               if (index === 0) {
+                currentWeatherMain()
+               } else {
+                photo.setAttribute('src', `https:${nextDaysForecast[index].day.condition.icon}`) 
+                mainTemperature.textContent = `${Math.floor(nextDaysForecast[index].day.maxtemp_c)}℃`
+                mainWeather.textContent =  nextDaysForecast[index].day.condition.text
+                humidity.innerHTML = `💦 ${nextDaysForecast[index].day.avghumidity}% / 💨 ${Math.floor(nextDaysForecast[index].day.maxwind_kph)}<span class='smaller-unit'>km/h</span>`
+            }};        
         })
     }
 }

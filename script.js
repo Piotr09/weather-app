@@ -13,7 +13,7 @@ const nextDaysIcon = document.querySelectorAll('.full-forecast__next-days li img
 const nextDaysTemparature = document.querySelectorAll('.full-forecast__next-days--temperature')
 
 const GEOCODING_URL = 'https://api.openweathermap.org/geo/1.0/direct?q='
-const WEATHER_URL = 'http://api.weatherapi.com/v1/forecast.json?key='
+const WEATHER_URL = 'https://api.weatherapi.com/v1/forecast.json?key='
 const API_TOKEN = 'e9f9eb83f1c04a2a85f174418222605'
 OPEN_WEATHER_API_TOKEN = '&appid=9b8e273d9d1f44fac5fc9ea06dc377db&units=metric'
 

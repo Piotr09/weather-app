@@ -1,3 +1,3 @@
-# Simple weather app
+# Weather app
 
 Preview: https://piotr09.github.io/weather-app/

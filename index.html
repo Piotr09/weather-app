@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prognoza pogody</title>
+    <meta
+      name="description"
+      content="Sprawdź prognozę pogody na całym świecie!"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,41 +16,50 @@
       rel="stylesheet"
     />
     <script
-      src="https://kit.fontawesome.com/3710696c33.js"
+      src="https://kit.fontawesome.com/8481b2cba1.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./main.css" />
   </head>
-
   <body>
-    <div class="wrapper">
-      <div class="top">
-        <h1>weather app</h1>
-        <div class="main-info">
-          <div>
-            <h3 class="city-name"></h3>
-            <input type="text" placeholder="Wpisz nazwę miasta..." /><button>
-              Wyślij
-            </button>
-            <p class="warning"></p>
-          </div>
-          <span class="photo"></span>
-        </div>
+    <section class="main-wrapper">
+      <h1>Sprawdź pogodę na całym świecie!</h1>
+      <div class="search">
+        <input type="text" placeholder="Wpisz nazwę miasta..." />
+        <button aria-label="search button">
+          <i class="fas fa-magnifying-glass"></i>
+        </button>
+        <p class="warning"></p>
       </div>
-      <div class="bottom">
-        <div class="headings">
-          <p>Weather:</p>
-          <p>Temperature:</p>
-          <p>Humidity:</p>
+      <div class="full-forecast">
+        <div class="full-forecast__current">
+          <img />
+          <h3></h3>
+          <p class="full-forecast__current--temperature"></p>
+          <p class="full-forecast__current--weather"></p>
+          <p class="full-forecast__current--country"></p>
+          <p class="full-forecast__current--humidity"></p>
         </div>
-        <div class="weather-info">
-          <p class="weather"></p>
-          <p class="temperature"></p>
-          <p class="humidity"></p>
-        </div>
+        <ul class="full-forecast__next-days">
+          <li>
+            <img />
+            <span class="full-forecast__next-days--date"></span>
+            <p class="full-forecast__next-days--temperature"></p>
+          </li>
+          <li>
+            <img />
+            <span class="full-forecast__next-days--date"></span>
+            <p class="full-forecast__next-days--temperature"></p>
+          </li>
+          <li>
+            <img />
+            <p class="full-forecast__next-days--date"></p>
+            <span class="full-forecast__next-days--temperature"></span>
+          </li>
+        </ul>
       </div>
-    </div>
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./js/script.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>

@@ -222,6 +222,10 @@ button {
   margin: 0;
 }
 
+.full-forecast__next-days :hover {
+  cursor: pointer;
+}
+
 .full-forecast__next-days--date {
   background-color: #43aedc;
   color: white;

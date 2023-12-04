@@ -12,20 +12,22 @@
 @mixin backgroundText {
   background-color: $mainColor;
   color: white;
-  border-radius: 8px;
-  padding: 5px 10px;
+  border-radius: 1rem;
+  padding: 0.25rem 0.5rem;
+}
+
+@mixin glassEffect {
+  background: rgba(18, 29, 61, 0.35);
+  border-radius: 1rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(11.4px);
 }
 
 $lightGrey: #9c9c9c;
 $mainColor: #43aedc;
-
-@mixin glassEffect {
-  background: rgba(255, 255, 255, 0.76);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.4px);
-  -webkit-backdrop-filter: blur(11.4px);
-}
+$white: #ffffff;
+$textShadow: 0 0 5px rgba(32, 26, 65, 0.3);
 
 * {
   box-sizing: border-box;
@@ -34,17 +36,43 @@ $mainColor: #43aedc;
 }
 
 body {
-  background-image: url("./img/background.jpg");
-  background-size: 100%;
-  background-position-y: 60%;
-  font-family: "Sora", sans-serif;
+  transition: 0.3s ease-in-out;
+  font-family: "Figtree", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 
+  h4 {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position-y: 30%;
+    background-position-x: 60%;
+    animation: shrink 8s infinite alternate;
+  }
+
   @include desktop() {
     height: 100vh;
+  }
+}
+
+.tile {
+  @include glassEffect();
+  h2 {
+    font-size: 2.5rem;
+    color: white;
+    padding: 0.5rem 1rem;
   }
 }
 
@@ -69,20 +97,24 @@ body {
 }
 
 input {
-  font-size: 16px;
-  font-family: "Sora", sans-serif;
+  font-family: "Figtree", sans-serif;
   font-weight: 300;
-  margin: 20px auto;
+  margin: 1.25rem auto;
   background: none;
   border: none;
-  color: rgb(46, 46, 46);
-  padding: 8px 10px;
-  background-color: white;
+  color: white;
+  font-size: 1.5rem;
+  padding: 1rem;
+  @include glassEffect();
   border-radius: 10px;
   width: 100%;
-  height: 45px;
-  margin-bottom: 40px;
+  height: 60px;
+  line-height: 200%;
+  margin-bottom: 2rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  &::placeholder {
+    color: white;
+  }
 }
 
 button {
@@ -99,8 +131,8 @@ button {
   width: fit-content;
   position: absolute;
   right: 10px;
-  top: 22px;
-  color: black;
+  top: 30px;
+  color: white;
   font-size: 20px;
 }
 
@@ -110,12 +142,14 @@ button {
 }
 
 .main-wrapper {
-  max-width: 800px;
+  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 40px 20px;
-  @include glassEffect();
+  padding: 2rem 1rem;
   border-radius: 0;
+  @include desktop() {
+    margin: 100px auto 0;
+  }
 
   h1 {
     text-align: center;
@@ -124,8 +158,260 @@ button {
   }
 
   @include desktop() {
-    padding: 40px;
-    border-radius: 16px;
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  @include desktop() {
+    transform: translateY(-8.7rem);
+  }
+}
+
+.uv {
+  &__level {
+    color: $white;
+    font-size: 1rem;
+    padding: 0.25rem 1rem;
+  }
+  &__scale {
+    width: calc(100% - 2rem);
+    position: relative;
+    margin: 1rem auto;
+    border-radius: 1rem;
+    height: 5px;
+    background: rgb(44, 193, 60);
+    background: linear-gradient(
+      90deg,
+      rgba(44, 193, 60, 1) 0%,
+      rgba(255, 190, 0, 1) 29%,
+      rgba(250, 9, 9, 1) 50%,
+      rgba(137, 21, 176, 1) 79%
+    );
+  }
+  &__point {
+    position: absolute;
+    width: 0.4rem;
+    height: 0.4rem;
+    z-index: 1;
+    background-color: $white;
+    top: -0.75px;
+    border-radius: 50%;
+  }
+}
+
+.sunset {
+  &__hour {
+    display: flex;
+    justify-content: center;
+    margin: -0.5rem 0 1.5rem;
+    color: bisque;
+    font-size: 0.8rem;
+  }
+}
+
+.sunrise {
+  @include glassEffect();
+  overflow: hidden;
+  h2 {
+    font-size: 2.5rem;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+  &__progress {
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: -0.25rem auto;
+    transform: translateY(-0.75rem);
+  }
+  &__overflow {
+    position: relative;
+    width: 5rem;
+    height: 3.75rem;
+    margin-bottom: -1rem;
+    padding-top: 0.25rem;
+  }
+  &__night {
+    top: 0.25rem;
+    left: 0;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 5px solid transparent;
+    position: absolute;
+    border-bottom-color: #232142;
+    border-right-color: #232142;
+    transform: rotate(45deg);
+    z-index: 1;
+  }
+  &__bar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 5px solid #d8d8d87a;
+    z-index: 2;
+    &::before {
+      content: "";
+      width: 1rem;
+      height: 1rem;
+      background-color: rgb(255, 208, 0);
+      border-radius: 50%;
+      left: 2%;
+      top: 77%;
+      position: absolute;
+      z-index: 2;
+      box-shadow: 0 0 0.3rem 0.3rem rgb(190, 172, 109);
+    }
+  }
+}
+
+.save-location {
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  right: 0;
+  top: 0.5rem;
+  cursor: pointer;
+  @include glassEffect();
+  @include desktop() {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+.wind {
+  &__data {
+    background: rgba(18, 29, 61, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    p {
+      font-size: 9px;
+    }
+  }
+  &__circle {
+    width: 7rem;
+    height: 7rem;
+    display: flex;
+    flex-direction: column;
+    color: $white;
+    border-radius: 50%;
+    border: 3px dashed #d8d8d87a;
+    margin: 1rem auto;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+
+    .north,
+    .east,
+    .south,
+    .west {
+      position: absolute;
+      color: #d8d8d87a;
+      font-size: 12px;
+    }
+    .north {
+      top: 0.25rem;
+    }
+    .east {
+      right: 0.25rem;
+    }
+    .south {
+      bottom: 0.25rem;
+    }
+    .west {
+      left: 0.25rem;
+    }
+  }
+  &__arrow {
+    transform: rotate(90deg);
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    hr {
+      position: relative;
+      overflow: unset;
+      border-top: 1px solid #b6c0d1;
+      &::before {
+        content: "";
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        transform: translate(-5px, -2.5px);
+        border: 1px solid #b6c0d1;
+        position: absolute;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 10px solid #b6c0d1;
+        right: 0;
+        transform: rotate(95deg) translate(-5px, -5px);
+      }
+    }
+  }
+}
+
+.hour-by-hour {
+  @include glassEffect();
+  height: fit-content;
+  z-index: 1;
+  ul {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0.5rem 1rem;
+    max-width: calc(100vw - 40px);
+    overflow-x: scroll;
+    position: relative;
+    &::before {
+      content: "";
+      height: auto;
+      width: 10px;
+      filter: drop-shadow(-7px 1px 10px #000);
+      position: absolute;
+      right: 0;
+    }
+    li {
+      display: flex;
+      flex-direction: column;
+      width: 17.5%;
+      text-align: center;
+      color: white;
+      gap: 0.5rem;
+      img {
+        padding: 0.25rem;
+      }
+    }
+  }
+  @include desktop() {
+    max-width: 40vw;
+  }
+}
+
+.hum {
+  &__number {
+    font-size: 4.5rem !important;
   }
 }
 
@@ -148,21 +434,27 @@ button {
     width: 100%;
     text-align: center;
     position: relative;
-    @include glassEffect();
+    color: $white;
+    text-shadow: $textShadow;
+    @include desktop() {
+      @include glassEffect();
+    }
 
     &--weather {
-      color: $lightGrey;
+      // color: $lightGrey;
       font-weight: 300;
-      margin: 10px 0;
+      margin: -5px 0 10px;
       padding: 0;
+      text-shadow: $textShadow;
     }
 
     &--temperature {
-      color: $mainColor;
-      font-weight: 700;
-      font-size: 30px;
+      color: $white;
+      font-weight: 300;
+      font-size: 6rem;
       padding: 0;
-      margin: 10px 0;
+      margin: 5px 0;
+      text-shadow: $textShadow;
     }
 
     &--country {
@@ -179,7 +471,8 @@ button {
     }
 
     h3 {
-      font-size: 32px;
+      font-size: 2rem;
+      font-weight: 300;
       margin: 0;
       padding: 0;
     }
@@ -192,40 +485,51 @@ button {
     width: 100%;
     padding: 0;
     margin: 0;
+    @include glassEffect();
 
     :hover {
       cursor: pointer;
     }
 
     &--date {
-      @include backgroundText();
-      font-size: 14px;
+      font-size: 1.2rem;
+      color: $white;
     }
 
     &--temperature {
       font-size: 17px;
-      color: $lightGrey;
+      color: $white;
     }
 
     li {
-      background: rgba(255, 255, 255, 0.56);
-      border-radius: 16px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(11.4px);
-      -webkit-backdrop-filter: blur(11.4px);
-      border: 1px solid rgba(255, 255, 255, 0.64);
       width: 100%;
       display: flex;
       align-items: center;
-      padding: 5px 10px;
       justify-content: space-between;
       margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0 1rem;
+      margin: 0;
+
+      img {
+        width: 5rem;
+        padding: 0.5rem;
+      }
 
       @include desktop() {
         height: calc(100% / 3 - 15px);
         margin-bottom: 0;
-        padding: 0 10px;
+        padding: 0 1rem;
       }
     }
+  }
+}
+
+@keyframes shrink {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
   }
 }

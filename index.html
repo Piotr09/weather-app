@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
     <script
@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="./main.css" />
   </head>
   <body>
+    <div class="background"></div>
     <section class="main-wrapper">
-      <h1>Sprawdź pogodę na całym świecie!</h1>
       <div class="search">
         <input type="text" placeholder="Wpisz nazwę miasta..." />
         <button aria-label="search button">
@@ -33,14 +33,19 @@
       </div>
       <div class="full-forecast">
         <div class="full-forecast__current">
-          <img />
+          <!-- <img class="full-forecast__img" /> -->
           <h3></h3>
+          <button class="save-location" onclick="saveLocation()">
+            <i class="fa-solid fa-plus"></i> Zapamiętaj
+          </button>
           <p class="full-forecast__current--temperature"></p>
           <p class="full-forecast__current--weather"></p>
           <p class="full-forecast__current--country"></p>
           <p class="full-forecast__current--humidity"></p>
         </div>
+        <div id="item-list" class="hour-by-hour"></div>
         <ul class="full-forecast__next-days">
+          <h4 class="full-forecast__next-days--title">Prognoza (3 dni)</h4>
           <li>
             <span class="full-forecast__next-days--date"></span>
             <img />
@@ -57,6 +62,48 @@
             <span class="full-forecast__next-days--temperature"></span>
           </li>
         </ul>
+        <section class="grid-wrapper">
+          <div class="tile uv">
+            <h4>Index UV</h4>
+            <h2 class="uv__number"></h2>
+            <span class="uv__level"></span>
+            <div class="uv__scale">
+              <span class="uv__point"></span>
+            </div>
+          </div>
+          <div class="tile sunrise">
+            <h4>Wschód słońca</h4>
+            <h2 class="sunrise__hour"></h2>
+            <p class="sunset__hour"></p>
+            <div class="sunrise__progress">
+              <div class="sunrise__overflow">
+                <div class="sunrise__bar"></div>
+                <div class="sunrise__night"></div>
+              </div>
+            </div>
+          </div>
+          <div class="tile wind">
+            <h4>Wiatr</h4>
+            <div class="wind__circle">
+              <div class="wind__data">
+                <h3 class="wind__number">11</h3>
+                <p>km/h</p>
+              </div>
+              <div class="wind__arrow">
+                <hr />
+              </div>
+              <span class="north">N</span>
+              <span class="east">E</span>
+              <span class="south">S</span>
+              <span class="west">W</span>
+            </div>
+          </div>
+          <div class="tile hum">
+            <h4>Wilgotność</h4>
+            <h2 class="hum__number"></h2>
+            <span class="hum__description"></span>
+          </div>
+        </section>
       </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

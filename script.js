@@ -24,7 +24,7 @@ const humidityPercent = document.querySelector('.hum__number')
 const saveLocationButton = document.querySelector('.save-location')
 
 const GEOCODING_URL = 'https://api.openweathermap.org/geo/1.0/direct?q='
-const GEOCODING_REVERSE_URL = 'http://api.openweathermap.org/geo/1.0/reverse?'
+const GEOCODING_REVERSE_URL = 'https://api.openweathermap.org/geo/1.0/reverse?'
 const WEATHER_URL = 'https://api.weatherapi.com/v1/forecast.json?key='
 const API_TOKEN = 'e9f9eb83f1c04a2a85f174418222605'
 OPEN_WEATHER_API_TOKEN = '&appid=9b8e273d9d1f44fac5fc9ea06dc377db&units=metric'

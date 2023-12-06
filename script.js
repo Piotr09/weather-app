@@ -182,7 +182,7 @@ async function getWeather() {
                         }
                         break;
                     default:
-                    // to be continued
+                        background.style.background = "linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%)";
                 }
 
             }
